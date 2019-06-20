@@ -1,10 +1,11 @@
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   width: 1000px;
   margin: 10px auto;
   text-align: center;
   padding: 10px;
   user-select: none;
+  color: white;
 }
 
 h2 {
@@ -18,10 +19,14 @@ span{
   margin-top: 20px;
 }
 
+.status{
+  padding: 15px;
+}
+
 div[id^="row-"] div {
   width: 200px;
   height: 200px;
-  border: 1px solid red;
+  border: 1px solid white;
   float: left;
 
 }
@@ -53,4 +58,9 @@ div.board {
   width: 608px;
   overflow: hidden;
   margin: 0 auto;
+  color: white;
+  font-size: 200px;
+  text-align: center;
+  vertical-align: middle;
+  
 }
