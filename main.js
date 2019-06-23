@@ -16,6 +16,8 @@ let twoPlayerButton = document.getElementById("2player");
 let onePlayerButton = document.getElementById("1player");
 let zeroPlayerButton = document.getElementById("0player");
 let board = document.querySelector('.board')
+let player1Name;
+let player2Name;
 
 //Variables that control the game state
 let gameStarted = false; //Checked when clicking. Could combine with gameOver but left as two variables for clarity. 
@@ -26,18 +28,30 @@ let buttonArr = [onePlayerButton, twoPlayerButton, zeroPlayerButton]; //for ease
 
 //Event listeners
 onePlayerButton.addEventListener("click", () => {
+  player1Name = null;
   numOfPlayers = 1;
+  while(!player1Name){
+    player1Name = prompt("Please enter your name", "");
+  }
   initializeGame();
   buttonArr.forEach((button)=> button.disabled = true);
-  status.textContent = `Player X's turn`; //Maybe change this to reference a variable that says which turn it is
+  status.textContent = `${player1Name}: X's turn`; 
   timerFunction(); //starts the game timer
 });
 
 twoPlayerButton.addEventListener("click", () => {
+  player1Name = null;
+  player2Name = null;
   numOfPlayers = 2; 
+  while(!player1Name){
+    player1Name = prompt("Please enter Player 1's name", "");
+  }
+  while(!player2Name){
+    player2Name = prompt("Please enter Player 2's name", "");
+  }
   initializeGame();
   buttonArr.forEach((button)=> button.disabled = true);
-  status.textContent = `Player X's turn`; //Maybe change this to reference a variable that says which turn it is
+  status.textContent = `${player1Name} X's turn`; 
   timerFunction(); //starts the game timer
 });
 
@@ -45,20 +59,22 @@ zeroPlayerButton.addEventListener("click", () => {
   numOfPlayers = 0; 
   initializeGame();
   buttonArr.forEach((button)=> button.disabled = true);
-  status.textContent = `Computer X's turn`; //Maybe change this to reference a variable that says which turn it is
+  status.textContent = `Computer X's turn`; 
   timerFunction(); //starts the game timer
   computerPicks();
 });
 
 board.addEventListener("click", e => {
   let cellClicked = event.target;   
-  checkClick(cellClicked);  
-  checkforWinner(); 
-  if(!gameOver){switchTurn()};
-  if(!gameOver && numOfPlayers === 1 && whosTurn.includes('computer')){
-    computerPicks();
+  if(checkClick(cellClicked)) {  //only switches turn if the click was allowed
+    checkforWinner(); 
+    if(!gameOver){switchTurn()};
+    if(!gameOver && numOfPlayers === 1 && whosTurn.includes('computer')){
+      setTimeout(computerPicks, 500); //Adds a small delay before the computer pick appears
+    }
   }
 });
+
 
 //Functions
 function switchTurn(){ //Could use switch cases.
@@ -67,16 +83,16 @@ function switchTurn(){ //Could use switch cases.
       status.textContent = `Computer O's turn`;
       return whosTurn = 'computer2';
     }else{
-      status.textContent = `Player X's turn`;
+      status.textContent = `${player1Name}: X's turn`;
       return whosTurn = 'player1'
     }
   }
   if(numOfPlayers === 2) {
     if(whosTurn === 'player1'){
-      status.textContent = `Player O's turn`;
+      status.textContent = `${player2Name}: O's turn`;
       return whosTurn = 'player2'
     }else{
-      status.textContent = `Player X's tTurn`;
+      status.textContent = `${player1Name}: X's turn`;
       return whosTurn = 'player1'
     }
   }
@@ -94,12 +110,31 @@ function switchTurn(){ //Could use switch cases.
 function checkClick(cell){
   if(!cell.textContent && gameStarted){
     updateCell(cell);
+    return true;
   }else if(gameStarted === false){
     alert('Please press Start')
+    return false;
   }else{ //if a cell with a value is being clicked on
     blink(cell);
     status.textContent = `Please select an empty cell`;
+    return false;
   }
+}
+
+//Inelegant way to blink the text red when the user selects a cell that has already been selected
+function blink(cell) {
+  setTimeout(function() {
+      cell.style.color = "red";
+  }, 150);
+  setTimeout(function() {
+    cell.style.color = "";
+  }, 650);
+  setTimeout(function() {
+    cell.style.color = "red";
+  }, 1150);
+  setTimeout(function() {
+    cell.style.color = "";
+  }, 1650);
 }
 
 function updateCell(cell){
@@ -120,14 +155,22 @@ function checkforWinner(){
   
   checkAnswer.forEach((cond)=>{
     if(cond === "XXX"){
-      status.textContent = `X's win!`;
+      if(player1Name){
+       status.textContent = `${player1Name}: X's win!`;
+      }else{
+        status.textContent = `X's win!`;
+      }
       gameOver = true;
       gameStarted = false;
       buttonArr.forEach((button)=> button.disabled = false);
       board.style.backgroundImage = lines[checkAnswer.indexOf(cond)]; //I could change the lines array to an object with the win condition as the key and the image as the value
     }
     if(cond === "OOO"){
-      status.textContent = `O's wins!`;
+      if(player2Name){
+        status.textContent = `${player2Name}: O's win!`;
+       }else{
+         status.textContent = `O's win!`;
+       }
       gameOver = true;
       gameStarted = false;
       buttonArr.forEach((button)=> button.disabled = false);
