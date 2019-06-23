@@ -6,14 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Tic Tac Toe</title>
     <link type="text/css" rel="stylesheet" href="style.css" />
-  
-    <style>
-  
-    </style>
-
-  
-  </head>
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Schoolbell&display=swap" rel="stylesheet">
+    </head>
   <body>
     <h2>Tic Tac Toe</h2>
     <div class="board"> 
@@ -33,125 +27,15 @@
         <div id="cell-8"></div>
       </div>
     </div>
-
     <div class="status">
-      <div id="status-area">Status Area</div>
-      <br />
-      <div id="timer">Time Elapsed: 0</div>
-      <br />
-      <button id="start" type="button">Start Game</button>
-      <br />
-      <button id="computer" type="button">Computer</button>
+      <span id = "statusAndTimer">
+        <div id="status-area">Please Press Start...</div>
+        <div id="timer">Time Elapsed: 00:00:00</div>
+      </span>
+      <button id="2player" type="button">Player vs Player</button>
+      <button id="1player" type="button">Player vs Computer</button>
+      <button id="0player" type="button">Computer vs Computer</button>
     </div>
     <script src="main.js"></script>
   </body>
-
-  <script>
-    let cell0 = document.getElementById('cell-0');
-    let cell1 = document.getElementById('cell-1');
-    let cell2 = document.getElementById('cell-2');
-    let cell3 = document.getElementById('cell-3');
-    let cell4 = document.getElementById('cell-4');
-    let cell5 = document.getElementById('cell-5');
-    let cell6 = document.getElementById('cell-6');
-    let cell7 = document.getElementById('cell-7');
-    let cell8 = document.getElementById('cell-8');
-    let allCells = [cell0, cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8];
-    
-    //Start Button
-    let gameStarted = false;
-    let status = document.getElementById("status-area");
-    let startButton = document.getElementById("start");
-    startButton.addEventListener("click", () => {
-      startButton.disabled = true;
-      status.textContent = `Player X's turn`;
-      gameStarted = true;
-      window.setInterval(countSecs, 1000);
-    });
-
-
-    let board = document.querySelector('.board')
-    let cellClicked;
-    let playerTurn = true;
-    board.addEventListener("click", e => {
-      cellClicked = event.target;                     //event.target is the cell being clicked on
-      if(!cellClicked.textContent && gameStarted){
-        if(playerTurn){
-        cellClicked.textContent = 'X';
-        checkforWinner();
-        playerTurn = false;
-        status.textContent = `Player O's turn`;
-        }else{
-          cellClicked.textContent = 'O'
-          checkforWinner();
-          playerTurn = true;
-          status.textContent = `Player X's turn`;
-        }
-      }else if(gameStarted == false){
-        alert('Please press Start')
-      }else{
-        alert('Please select an empty cell')
-      }
-    });
-
-    //Checking for a winner - Be more clever later
-    function checkforWinner(){
-      let row1 = cell0.textContent+cell1.textContent+cell2.textContent;
-      let row2 = cell3.textContent+cell4.textContent+cell5.textContent;
-      let row3 = cell6.textContent+cell7.textContent+cell8.textContent;
-      let col1 = cell0.textContent+cell3.textContent+cell6.textContent;
-      let col2 = cell1.textContent+cell4.textContent+cell7.textContent;
-      let col3 = cell2.textContent+cell5.textContent+cell8.textContent;
-      let diagL = cell0.textContent+cell4.textContent+cell8.textContent;
-      let diagR = cell2.textContent+cell4.textContent+cell6.textContent;
-      
-      let checkAnswer = [row1, row2, row3, col1, col2, col3, diagL, diagR];
-
-      checkAnswer.forEach((cond)=>{
-        if(cond === "XXX"){
-          alert('You win!')
-         reset()
-        }
-        if(cond === "OOO"){
-          alert('The computer wins!')
-          reset()
-        }
-      })
-    }
-
-    //Reset the board and re-enable the start button
-    function reset(){
-      allCells.forEach(cell => cell.textContent = "");
-      gameStarted = false;
-      startButton.disabled = false;
-      playerTurn = false;
-    }
-
-    //Timer
-    let seconds = 0;
-    let timer = document.getElementById('timer');
-    function countSecs(){
-      seconds++;
-      timer.textContent = `Time Elapsed: ${seconds} seconds`;
-    }
-
-    //Computer picks a cell at random from an array of empty cells
-    let compButton = document.getElementById("computer");
-    compButton.addEventListener("click", () => {
-      computerPicks();
-    });
-
-    //*************************This isn't working********************************
-    let emptyCells = [];
-     function computerPicks() { 
-        for(let i = 0; i<allCells.length; i++){
-          if(allCells[i].textContent == ""){
-            emptyCells.push(allCells[i]);
-          }
-        }
-      let compChoice = Math.floor(Math.random() * Math.floor(emptyCells.length))
-      emptyCells[compChoice].textContent = "O";
-     }
-    
-  </script>
 </html>
