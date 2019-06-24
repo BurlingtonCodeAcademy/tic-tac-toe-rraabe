@@ -29,6 +29,7 @@ let buttonArr = [onePlayerButton, twoPlayerButton, zeroPlayerButton]; //for ease
 //Event listeners
 onePlayerButton.addEventListener("click", () => {
   player1Name = null;
+  player2Name = null;
   numOfPlayers = 1;
   while(!player1Name){
     player1Name = prompt("Please enter your name", "");
@@ -56,6 +57,8 @@ twoPlayerButton.addEventListener("click", () => {
 });
 
 zeroPlayerButton.addEventListener("click", () => {
+  player1Name = null;
+  player2Name = null;
   numOfPlayers = 0; 
   initializeGame();
   buttonArr.forEach((button)=> button.disabled = true);
@@ -70,7 +73,7 @@ board.addEventListener("click", e => {
     checkforWinner(); 
     if(!gameOver){switchTurn()};
     if(!gameOver && numOfPlayers === 1 && whosTurn.includes('computer')){
-      setTimeout(computerPicks, 500); //Adds a small delay before the computer pick appears
+      setTimeout(computerPicks, 250); //Adds a small delay before the computer pick appears
     }
   }
 });
