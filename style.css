@@ -1,27 +1,43 @@
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   width: 1000px;
   margin: 10px auto;
   text-align: center;
   padding: 10px;
   user-select: none;
+  color: white;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 78px;
   text-align: center;
   height: 75px;
+  margin: 0px 10px 10px 10px;
+  font-family: 'Montserrat', sans-serif;
+  padding-bottom: 15px;
 }
 
 span{
-  font-size: 75px;
+  font-size: 48px;
   margin-top: 20px;
 }
+
+.status{
+  padding: 15px;
+  font-size: 36px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.statusAndTimer{
+  display: flex;
+  justify-content: space-evenly; 
+}
+
 
 div[id^="row-"] div {
   width: 200px;
   height: 200px;
-  border: 1px solid red;
+  border: 2px solid white;
   float: left;
 
 }
@@ -53,4 +69,34 @@ div.board {
   width: 608px;
   overflow: hidden;
   margin: 0 auto;
+  color: white;
+  font-size: 200px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: 'Schoolbell', cursive;
+  border: 1px solid white;
+  border-radius: 3%;
+  padding: 25px;
+  background-repeat: no-repeat;
 }
+
+
+button {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 20px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 12px;
+}
+
+button:hover{
+	background-color: lightgrey;
+}
+

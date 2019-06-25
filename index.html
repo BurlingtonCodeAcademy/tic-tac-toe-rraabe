@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tic Tac Toe</title>
-  <link type="text/css" rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <h2>Tic Tac Toe</h2>
-  <div class="board">
-    <div id="row-1">
-      <div id="cell-0"></div>
-      <div id="cell-1"></div>
-      <div id="cell-2"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tic Tac Toe</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Schoolbell&display=swap" rel="stylesheet">
+    </head>
+  <body>
+    <h2>Tic Tac Toe</h2>
+    <div class="board"> 
+      <div id="row-1">
+        <div id="cell-0"></div>
+        <div id="cell-1"></div>
+        <div id="cell-2"></div>
+      </div>
+      <div id="row-2">
+        <div id="cell-3"></div>
+        <div id="cell-4"></div>
+        <div id="cell-5"></div>
+      </div>
+      <div id="row-3">
+        <div id="cell-6"></div>
+        <div id="cell-7"></div>
+        <div id="cell-8"></div>
+      </div>
     </div>
-    <div id="row-2">
-      <div id="cell-3"></div>
-      <div id="cell-4"></div>
-      <div id="cell-5"></div>
-    </div>
-    <div id="row-3">
-      <div id="cell-6"></div>
-      <div id="cell-7"></div>
-      <div id="cell-8"></div>
-    </div>
-  </div>
-
-  <div class="status">
-    <button id="start" type="button">Start Game</button>
-  </div>
-  <script src="main.js"></script>
-</body>
-
+    <div class="status">
+      <span id = "statusAndTimer">
+        <div id="status-area">Please Press Start...</div>
+        <div id="timer">Time Elapsed: 00:00:00</div>
+      </span>
+      <button id="2player" type="button">Player vs Player</button>
+      <button id="1player" type="button">Player vs Computer</button>
+      <button id="0player" type="button">Computer vs Computer</button>
+    </div>    
+    <script src="main.js"></script>
+  </body>
 </html>
